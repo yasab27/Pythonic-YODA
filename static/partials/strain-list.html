@@ -1,0 +1,39 @@
+<section class = "container" style= "padding-top:20px">
+
+  <h1> Database </h1>
+  <h3 class= "lead"> A collection of previous strains analyzed by Yoda, available for analysis. </h3>
+
+
+  <div class="form-group">
+    <label class="col-form-label" for="inputDefault">Search</label>
+    <input type="text" class="form-control" placeholder="Strain Name, Experimenter Name, Institution..." ng-model = "search">
+  </div>
+
+  <div style= "padding-top:20px">
+  <table class="table table-hover" style= "padding-top:20px">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Creation Date</th>
+        <th scope="col">Experimenter</th>
+        <th scope="col">Institution</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-light" dir-paginate= "strain in vm.strains | itemsPerPage: 10 | filter: search ">
+        <th scope="row"> <a ng-href = "#/strain/{{strain.id}}" style= "color: black" >{{strain.name}}</a></th>
+        <td> {{strain.createdOn }}</td>
+        <td> {{strain.experimenter}}</td>
+        <td> {{strain.institution}} </td>
+      </tr>
+  </table>
+
+
+    <dir-pagination-controls class= "center" template-url= "/static/partials/dirPagination.tpl.html" max-size="5"
+                  direction-links="true"
+                  boundary-links="true"></dir-pagination-controls>
+
+  </div>
+
+
+</section>

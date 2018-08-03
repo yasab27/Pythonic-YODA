@@ -1,0 +1,67 @@
+<html ng-app= "MyApp">
+  <head>
+
+    <!-- CSS STLYING -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/static/css/custom.css" rel="stylesheet"/>
+
+  </head>
+
+  <body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light " >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor03" style= "text-align: center">
+
+      <ul class="navbar-nav mr-auto" >
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Instructions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" ng-href = "#/strains" >Database</a>
+        </li>
+      </ul>
+
+    </div>
+    </nav>
+
+
+    <!-- NAVBAR -->
+    <div ng-view></div>
+
+
+    <!-- ANGULAR JS -->
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-route.min.js"></script>
+
+    <!-- ADDITIONAL ANGULAR DEPENDENCIES -->
+    <script src = "/static/libs/dirPagination.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script src="/static/libs/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+
+    <!-- CONNECTING TO OUR CONTROLLERS AND WHAT NOT -->
+    <script src = "/static/angular-app.js"></script>
+
+    <!-- DATA FACTORIES -->
+    <script src = "/static/js/factories/strain-data-factory.js"></script>
+
+    <!-- INDIVIDUAL PAGE CONTROLELRS -->
+    <script src = "/static/js/controllers/home-controller.js"></script>
+    <script src = "/static/js/controllers/strainlist-controller.js"></script>
+    <script src = "/static/js/controllers/strain-data-controller.js"></script>
+
+
+  </body>
+
+
+</html>
