@@ -17,9 +17,6 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-data = UploadSet("data",DATA)
-app.config["UPLOADED_DATA_DEST"] = "static/data"
-configure_uploads(app, data)
 api = Api(app)
 
 # Setting up a basic route for the homepage without using Flask-RESTful. This enables us to run our angular on the front end
