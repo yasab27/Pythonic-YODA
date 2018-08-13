@@ -28,7 +28,6 @@ def home():
 # Adding resources:
 from resources.UploadResource import UploadResource
 api.add_resource(UploadResource,"/upload")
-
 api.add_resource(StrainResource,"/strain/<int:id>")
 api.add_resource(StrainListResource,"/strains")
 api.add_resource(StrainRegister,"/strains/new")
