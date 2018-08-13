@@ -27,5 +27,15 @@ function config($routeProvider)
       templateUrl:"../static/partials/output.html",
       controller: "OutputController",
       controllerAs: "vm"
+    })
+    .when("/about",{
+      templateUrl:"../static/partials/about.html",
+      controller: "AboutController",
+      controllerAs: "vm"
+    })
+    .when("/instructions",{
+      templateUrl:"../static/partials/instructions.html",
+      controller: "InstructionController",
+      controllerAs: "vm"
     });
 }

@@ -1,7 +1,6 @@
 angular.module("MyApp").controller("OutputController", OutputController);
 
 function OutputController($scope, strainDataFactory, expInfoFactory){
-  $scope.days = [2,4,6,9,11,13];
   $scope.data = strainDataFactory.processedData[0].data.SurvivalOutput;
   $scope.exp = expInfoFactory;
 
@@ -21,6 +20,11 @@ function OutputController($scope, strainDataFactory, expInfoFactory){
   $scope.series = names;
   console.log(names);
 
+  var dayWords = $scope.exp.days[0].split(",")
+  $scope.daysCleaned = [];
+  for(var i = 0; i < dayWords.length; i++){
+    $scope.daysCleaned.push(dayWords[i]);
+  }
   // vm.survivalIntegral = _computeSI(vm.timePoints, vm.survivalValues);
   $scope.options =
   {

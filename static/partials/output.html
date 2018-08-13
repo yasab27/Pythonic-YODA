@@ -11,7 +11,7 @@
 
     <div class = "col-md-7">
       <canvas id="line" class="chart chart-line" chart-data="displayData"
-      chart-labels="days" chart-series="series" chart-options="options">
+      chart-labels="daysCleaned" chart-series="series" chart-options="options">
       </canvas>
     </div>
 
@@ -21,7 +21,7 @@
   <thead>
     <tr>
       <th scope="col">Strains</th>
-      <th ng-repeat = "day in days"> Day {{day}} </th>
+      <th ng-repeat = "day in daysCleaned"> Day {{day}} </th>
     </tr>
   </thead>
   <tbody>

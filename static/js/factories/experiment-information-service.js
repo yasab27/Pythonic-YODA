@@ -4,17 +4,22 @@ function expInfoFactory(){
   var experimentName = [];
   var researcher = [];
   var institution = [];
-  // var days = [];
+  var days = [];
   var expInfo = [];
 
-  function setData(eN, r, i,  eI){
+  function setData(eN, r, i,d,  eI){
+
+    // experimentName = [];
+    // researcher = [];
+    // institution = [];
+    // days = [];
+    // expInfo = [];
+
+
     experimentName.push(eN);
     researcher.push(r);
     institution.push(i);
-    // for(var i = 0; i < d.length; i++)
-    // {
-    //   days.push(d[i]);
-    // }
+    days.push(d);
     expInfo.push(eI);
   }
 
@@ -23,7 +28,7 @@ function expInfoFactory(){
     experimentName: experimentName,
     researcher: researcher,
     institution: institution,
-    // days: days,
+    days: days,
     expInfo: expInfo
   };
 }

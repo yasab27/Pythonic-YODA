@@ -13,8 +13,8 @@ function ExperimentController(strainDataFactory, $scope, $location, expInfoFacto
   $scope.upload= function(){
     alert("Uploaded " + $scope.files.length + " documents.");
     strainDataFactory.processData($scope.files, vm.strainNames, vm.days);
-    console.log($scope.expname, $scope.researcher, $scope.institution, $scope.exdes);
-    expInfoFactory.setData($scope.expname, $scope.researcher, $scope.institution, $scope.exdes)
+    console.log($scope.expname, $scope.researcher, $scope.institution, vm.days,$scope.exdes);
+    expInfoFactory.setData($scope.expname, $scope.researcher, $scope.institution,vm.days, $scope.exdes)
     $scope.dis = true;
   };
 
