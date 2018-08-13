@@ -2,10 +2,7 @@ angular.module("MyApp").factory("strainDataFactory", strainDataFactory);
 
 function strainDataFactory($http)
 {
-  return {
-    strainList: strainList,
-    strainDisplay: strainDisplay
-  };
+  var processedData= [];
 
   // Return the entire list of Hotels
   function strainList()
@@ -24,6 +21,43 @@ function strainDataFactory($http)
   //   return $http.post("/hotels/" + id + "/reviews", review).then(complete).catch(failed);
   // }
 
+  function processData(files, layout, days)
+  {
+    $http({
+      method: 'POST',
+      url: '/upload',
+      headers: {
+          'Content-Type': 'multipart/form-data'
+      },
+      transformRequest: function (data, headersGetter) {
+          var formData = new FormData();
+          formData.append("layout", layout)
+          formData.append("days", days)
+          for(i = 0; i < files.length; i++) {
+              console.log(files[i]._file);
+              formData.append("dat", files[i]._file);
+          };
+          console.log(formData);
+          var headers = headersGetter();
+          delete headers['Content-Type'];
+
+          return formData;
+        }
+      })
+      .then(function (response) {
+        console.log( response);
+        processedData.push(response);
+      })
+      .catch(function (response, status) {
+        console.log(response);
+      });
+
+  }
+
+  // Return the processedData
+  // function getProcessedData(){
+  //   return processedData;
+  // }
 
   // What to do in the case of either promise. Since these are both
   // get methods, we want to return the JSON message's data on each instance
@@ -41,5 +75,14 @@ function strainDataFactory($http)
   {
     console.log(error.statusText);
   }
+
+
+  return {
+    processedData: processedData,
+    strainList: strainList,
+    strainDisplay: strainDisplay,
+    processData: processData,
+  };
+
 
 }

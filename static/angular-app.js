@@ -17,5 +17,15 @@ function config($routeProvider)
       templateUrl:"../static/partials/strain-data.html",
       controller: "StrainDataController",
       controllerAs: "vm"
+    })
+    .when("/newExperiment",{
+      templateUrl:"../static/partials/new-experiment.html",
+      controller: "ExperimentController",
+      controllerAs: "vm"
+    })
+    .when("/output",{
+      templateUrl:"../static/partials/output.html",
+      controller: "OutputController",
+      controllerAs: "vm"
     });
 }

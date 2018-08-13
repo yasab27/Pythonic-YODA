@@ -4,13 +4,12 @@
 # and numpy for data analysis.
 
 # Importing essential dependencies
-from flask import Flask, send_file
+from flask import Flask, send_file, request, jsonify
 from flask_restful import Api
 from flask_jwt import JWT, jwt_required
-
+from flask_uploads import UploadSet, configure_uploads, DATA
 # Importing resources
 from resources.StrainResource import StrainResource, StrainListResource, StrainRegister
-
 # Setting up application
 app = Flask(__name__)
 
@@ -18,6 +17,9 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+data = UploadSet("data",DATA)
+app.config["UPLOADED_DATA_DEST"] = "static/data"
+configure_uploads(app, data)
 api = Api(app)
 
 # Setting up a basic route for the homepage without using Flask-RESTful. This enables us to run our angular on the front end
@@ -25,11 +27,14 @@ api = Api(app)
 def home():
     return send_file("templates/index.html")
 
+
 # Adding resources:
+from resources.UploadResource import UploadResource
+api.add_resource(UploadResource,"/upload")
+
 api.add_resource(StrainResource,"/strain/<int:id>")
 api.add_resource(StrainListResource,"/strains")
 api.add_resource(StrainRegister,"/strains/new")
-
 
 if __name__ == "__main__":
     from db import db

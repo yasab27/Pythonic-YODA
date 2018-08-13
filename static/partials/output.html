@@ -1,0 +1,36 @@
+<section class = "container"  style= "padding-top:20px; padding-bottom: 20px">
+
+  <h1> {{exp.experimentName[0]}} </h1>
+
+  <div class = "row" style = "padding-top:10px">
+
+    <div class = "col-md-5">
+      <p class= "lead"> Experimenter: {{exp.researcher[0]}} @ {{exp.institution[0]}}</p>
+      <p> {{exp.expInfo[0]}}</p>
+    </div>
+
+    <div class = "col-md-7">
+      <canvas id="line" class="chart chart-line" chart-data="displayData"
+      chart-labels="days" chart-series="series" chart-options="options">
+      </canvas>
+    </div>
+
+  </div>
+
+  <table class="table table-hover" style= "padding-top:10px">
+  <thead>
+    <tr>
+      <th scope="col">Strains</th>
+      <th ng-repeat = "day in days"> Day {{day}} </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-light" ng-repeat = "strainData in data">
+      <td>{{ strainData.StrainName }} </td>
+      <td ng-repeat = "survivalValue in strainData.SurvivalValues track by $index"> {{ survivalValue | number:2 }}%</td>
+    </tr>
+  </tbody>
+  </table>
+
+
+</section>
