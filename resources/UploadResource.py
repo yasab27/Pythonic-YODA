@@ -1,12 +1,7 @@
 # A resource to test out uploading and reading form data,specifically excel files in python flask
 
-# Necessary improts
-import os
-import sys
-
 from flask import Flask, request
 from flask_restful import Resource, reqparse
-from flask_uploads import UploadSet, configure_uploads, DATA
 from analyzer.DayData import DayData
 from analyzer.Experiment import Experiment
 
@@ -14,8 +9,6 @@ from analyzer.Experiment import Experiment
 # Math imports if necessary
 import numpy as np
 import pandas as pd
-from scipy import stats
-from sklearn.linear_model import LinearRegression
 
 class UploadResource(Resource):
 

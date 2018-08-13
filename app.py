@@ -7,7 +7,6 @@
 from flask import Flask, send_file, request, jsonify
 from flask_restful import Api
 from flask_jwt import JWT, jwt_required
-from flask_uploads import UploadSet, configure_uploads, DATA
 # Importing resources
 from resources.StrainResource import StrainResource, StrainListResource, StrainRegister
 # Setting up application
