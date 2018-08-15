@@ -26,7 +26,7 @@
   </thead>
   <tbody>
     <tr class="table-light" ng-repeat = "strainData in data">
-      <td>{{ strainData.StrainName }} </td>
+      <td ng-click = "generateIndividualPage($index)">  {{ strainData.StrainName }}  </td>
       <td ng-repeat = "survivalValue in strainData.SurvivalValues track by $index"> {{ survivalValue | number:2 }}%</td>
     </tr>
   </tbody>

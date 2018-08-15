@@ -1,6 +1,6 @@
 angular.module("MyApp").controller("OutputController", OutputController);
 
-function OutputController($scope, strainDataFactory, expInfoFactory){
+function OutputController($scope, $log, $location, strainDataFactory, expInfoFactory, indStrainService){
   $scope.data = strainDataFactory.processedData[0].data.SurvivalOutput;
   $scope.exp = expInfoFactory;
 
@@ -25,6 +25,21 @@ function OutputController($scope, strainDataFactory, expInfoFactory){
   for(var i = 0; i < dayWords.length; i++){
     $scope.daysCleaned.push(dayWords[i]);
   }
+
+  $scope.generateIndividualPage = function($index){
+    indStrainService.survivalValues = $scope.data[$index].SurvivalValues;
+    indStrainService.strainName = $scope.data[$index].StrainName;
+    indStrainService.days = dayWords;
+    indStrainService.institution = $scope.exp.institution[0];
+    indStrainService.researcher = $scope.exp.researcher[0];
+    indStrainService.information = $scope.exp.expInfo[0];
+
+    $log.info(indStrainService.strainName)
+    $log.info(indStrainService.survivalValues);
+
+    $location.path("/output/" + indStrainService.strainName);
+  }
+
   // vm.survivalIntegral = _computeSI(vm.timePoints, vm.survivalValues);
   $scope.options =
   {

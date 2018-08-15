@@ -28,6 +28,11 @@ function config($routeProvider)
       controller: "OutputController",
       controllerAs: "vm"
     })
+    .when("/output/:strain",{
+      templateUrl:"../static/partials/individualOutput.html",
+      controller: "IndividualOutputController",
+      controllerAs: "vm"
+    })
     .when("/about",{
       templateUrl:"../static/partials/about.html",
       controller: "AboutController",

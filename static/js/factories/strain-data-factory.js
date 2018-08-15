@@ -16,6 +16,11 @@ function strainDataFactory($http)
     return $http.get("/strain/" + id).then(complete).catch(failed);
   }
 
+  //Post a new strain to the database
+  function strainPost(strain){
+    return $http.post("/strains/new",strain).then(complete).catch(failed);
+  }
+
   // function postReview(id, review)
   // {
   //   return $http.post("/hotels/" + id + "/reviews", review).then(complete).catch(failed);
@@ -82,6 +87,7 @@ function strainDataFactory($http)
     strainList: strainList,
     strainDisplay: strainDisplay,
     processData: processData,
+    strainPost: strainPost
   };
 
 
