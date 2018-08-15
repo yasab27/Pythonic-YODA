@@ -22,23 +22,56 @@
       <input type="text" class="form-control" placeholder="Yeast University" ng-model = "institution">
     </div>
 
-    <div class = "form-group">
-      <label class="col-form-label" for="inputDefault">Days Comma Delimited</label>
-      <input type="text" class="form-control" placeholder="2,4,6,9,11,13,..." id="inputDefault" ng-model = "vm.days">
-    </div>
-
-    <div class = "form-group">
-      <label class="col-form-label" for="inputDefault">Strain Column Names Comma Delimited</label>
-      <input type="text" class="form-control" placeholder="BY4743,BY4743,BY4743,DOA1,DOA1,DOA1,ERG5,ERG5,ERG5,..." id="inputDefault" ng-model ="vm.strainNames">
-    </div>
-
-
     <div class="form-group" style = "padding-bottom: 20px; padding-top: 20px;">
       <label for="exampleTextarea">Experiment Description</label>
       <textarea class="form-control" id="exampleTextarea" rows="3"  ng-model = "exdes"></textarea>
     </div>
 
+
+    <div style = "background-color: #eee; padding: 20px">
+
+      <div class = "form-group">
+        <label class="col-form-label" for="inputDefault">Days Comma Delimited</label>
+        <input type="text" class="form-control" placeholder="2,4,6,9,11,13,..." id="inputDefault" ng-model = "vm.days">
+      </div>
+
+      <div class= "alert alert-warning" ng-show = "failedAttempt && vm.days.length === 0"> Please enter day order. </div>
+
+      <div class = "row">
+        <div class="form-group col-6">
+          <label class="col-form-label" for="inputDefault">Machine</label>
+          <select class="custom-select" ng-model = "machineSelector">
+            <option ng-repeat = "machine in vm.machines">{{machine}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-6">
+          <label class="col-form-label" for="inputDefault">Replication</label>
+          <select class="custom-select" ng-model = "replicationSelector">
+            <option ng-repeat = "replication in vm.replicants">{{replication}}</option>
+          </select>
+        </div>
+
+
+      </div>
+
+      <label class="col-form-label" for="inputDefault">Enter Strain Names</label>
+      <input type="text" class="form-control" ng-model = "strainDesc" placeholder="DAL2, MIR1, RPL2....">
+
+      <div class = "form-group">
+        <label class="col-form-label" for="inputDefault">Configuration</label>
+        <input type="text" class="form-control" placeholder="Enter Custom Configuration" id="inputDefault" ng-model ="vm.strainNames">
+      </div>
+
+      <div class= "alert alert-warning" ng-show = "failedAttempt && vm.strainNames.length === 0"> Please enter configuration string. </div>
+
+    </div>
+
+
+
     <div style = "background-color: #eee; padding-top: 20px; padding-bottom: 20px; border: 10px #000000">
+
+
       <div class = "row">
 
         <div class = "col-md-4 text-center">
@@ -50,10 +83,12 @@
         </div>
 
         <div class = "col-md-4 text-center">
-          <button type="button" class="btn btn-primary btn-lg" ng-click="getData()" class = "col-md-4">View Data</button>
+          <button type="button" class="btn btn-primary btn-lg" ng-click="getData()" ng-disabled = "!dis" class = "col-md-4">Analyze</button>
         </div>
 
+
       </div>
+
     </div>
 
 

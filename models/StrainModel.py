@@ -12,7 +12,7 @@ from datetime import datetime
 
 class StrainModel(db.Model):
 
-    # Defining the schema for the table to store the db information. TODO: Implement a separable table for survival values
+    # Defining the schema for the table to store the db information
     __tablename__ = "strains"
     id = db.Column(db.Integer,primary_key=True)  # An id used to reference any strain model, used later for foreign keys
     name = db.Column(db.String(40))              # Limit the name to 40 characters only.
