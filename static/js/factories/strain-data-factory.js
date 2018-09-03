@@ -26,7 +26,7 @@ function strainDataFactory($http)
   //   return $http.post("/hotels/" + id + "/reviews", review).then(complete).catch(failed);
   // }
 
-  function processData(files, layout, days)
+  function processData(files, layout, days, odt)
   {
     $http({
       method: 'POST',
@@ -36,8 +36,10 @@ function strainDataFactory($http)
       },
       transformRequest: function (data, headersGetter) {
           var formData = new FormData();
-          formData.append("layout", layout)
-          formData.append("days", days)
+          formData.append("layout", layout);
+          formData.append("days", days);
+          formData.append("odt",odt );
+
           for(i = 0; i < files.length; i++) {
               console.log(files[i]._file);
               formData.append("dat", files[i]._file);

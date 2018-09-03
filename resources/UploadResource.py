@@ -25,10 +25,13 @@ class UploadResource(Resource):
                 timePoints.append(DayData(pd.read_csv(file)))
             exp = Experiment(timePoints)
 
+            # Getting the custom OD time threshold
+            ODT = float(request.form["odt"])
+            print(ODT)
             # STRAIN OUTLINE:
             colNames = request.form["layout"].split(",")
             days = [int(day) for day in request.form["days"].split(",")]
-            return {"SurvivalOutput": exp.strainJSON(colNames,days)}
+            return {"SurvivalOutput": exp.strainJSON(colNames,days,ODT)}
 
         # If no data transmitted
         return {"Message":"Please input CSV files for each day and comma delimited layout and "}

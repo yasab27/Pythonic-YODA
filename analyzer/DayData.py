@@ -31,8 +31,8 @@ class DayData:
         doublingTimes = self.ddf_norm.apply(DayData.calculateDoublingTime,args =(self.timeVectorSeconds,))
         return doublingTimes
 
-    def getThresholdTimes(self):
-        ddf_ttimes = self.ddf_norm.apply(DayData.calculateThresholdTime,args =(self.timeVectorSeconds,))
+    def getThresholdTimes(self, ODT):
+        ddf_ttimes = self.ddf_norm.apply(DayData.calculateThresholdTime,args =(self.timeVectorSeconds, ODT ))
         return ddf_ttimes
 
     # return a json representation of the well's important values
@@ -50,12 +50,12 @@ class DayData:
         return wellInformationList
 
     @classmethod
-    def calculateThresholdTime(cls,wellVector,timeVector):
-        if max(wellVector) <= 0.3:
+    def calculateThresholdTime(cls,wellVector,timeVector, ODT):
+        if max(wellVector) <= ODT:
             return 100000000
         # Get the points braketing 0.3 OD
-        lowerIndex = wellVector.where(wellVector < 0.3).idxmax()
-        upperIndex = wellVector.where(wellVector > 0.3).idxmin()
+        lowerIndex = wellVector.where(wellVector < ODT).idxmax()
+        upperIndex = wellVector.where(wellVector > ODT).idxmin()
 
 
         timeRange = timeVector[lowerIndex:upperIndex+1].values
@@ -65,7 +65,7 @@ class DayData:
 
         lm = LinearRegression()
         lm.fit(odRange, timeRange)
-        timePrediction = lm.predict(np.log(0.3))
+        timePrediction = lm.predict(np.log(ODT))
         timePrediction = timePrediction.transpose()
         return timePrediction
 

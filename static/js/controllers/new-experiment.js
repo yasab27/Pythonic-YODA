@@ -90,7 +90,10 @@ function ExperimentController(strainDataFactory, $scope, $location, expInfoFacto
 
     // Informing the user that the information has been uploaded to the backend.
     alert("Uploaded " + $scope.files.length + " documents.");
-    strainDataFactory.processData($scope.files, vm.strainNames, vm.days);
+    console.log($scope.odt);
+
+    strainDataFactory.processData($scope.files, vm.strainNames, vm.days, $scope.odt);
+    console.log($scope.odt);
     // console.log($scope.expname, $scope.researcher, $scope.institution, vm.days,$scope.exdes);
 
     // Upload the information to a factory service which can be used to temporarily save the data

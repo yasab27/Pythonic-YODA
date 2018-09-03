@@ -9,11 +9,11 @@ class Experiment:
         # dayList is an array of DayData objects
         self.dayList = dayList
 
-    def calculateThresholdMatrix(self):
+    def calculateThresholdMatrix(self,ODT):
         # Get the names of the wells
-        names = list(self.dayList[0].getThresholdTimes())
+        names = list(self.dayList[0].getThresholdTimes(ODT))
         # Create a list of all the threshold times. Note this is a numpy array
-        thresholdList = [day.getThresholdTimes().values for day in self.dayList]
+        thresholdList = [day.getThresholdTimes(ODT).values for day in self.dayList]
         # Return a new pandas dataframe with the names
         return pd.DataFrame(np.concatenate(thresholdList),columns=names)
 
@@ -22,9 +22,9 @@ class Experiment:
         return self.dayList[0].getWellDoublingTimes()
 
     # Generate a matrix of survival values at each timepoint
-    def generateWellSurivalMatrix(self):
+    def generateWellSurivalMatrix(self,ODT):
         # Set up a matrix of the threshold times for each time point for each well.
-        thresholdMatrix = self.calculateThresholdMatrix()
+        thresholdMatrix = self.calculateThresholdMatrix(ODT)
         doublingTimes = self.generateFirstDayDoublingTimes().to_frame().T
         # Add the doubling times for each well as the final row for the matrix. This makes
         # computation easier when we use an apply() function and the additioal day can be tossed out
@@ -36,9 +36,9 @@ class Experiment:
         survivalMatrix.drop(survivalMatrix.tail(1).index,inplace=True)
         return survivalMatrix
 
-    def generateGroupedSurvivalMatrix(self,nameList,dayNameList):
+    def generateGroupedSurvivalMatrix(self,nameList,dayNameList,ODT):
         # Generate the standard survivalMatrix for each well.
-        wellSurvivalMatrix = self.generateWellSurivalMatrix()
+        wellSurvivalMatrix = self.generateWellSurivalMatrix(ODT)
         # Rename the rows with the appropriate days
         groupedSurvivalMatrix = wellSurvivalMatrix.rename(index= lambda x:  dayNameList[x] )
         # Rename the columns with the names of the strains
@@ -48,9 +48,9 @@ class Experiment:
         averagedOutput = groupedSurvivalMatrix.groupby(by=groupedSurvivalMatrix.columns,axis=1).mean()
         return averagedOutput
 
-    def generateGroupedSurvivalMatrixSDs(self,nameList,dayNameList):
+    def generateGroupedSurvivalMatrixSDs(self,nameList,dayNameList,ODT):
         # Generate the standard survivalMatrix for each well.
-        wellSurvivalMatrix = self.generateWellSurivalMatrix()
+        wellSurvivalMatrix = self.generateWellSurvivalMatrix(ODT)
         # Rename the rows with the appropriate days
         groupedSurvivalMatrix = wellSurvivalMatrix.rename(index= lambda x:  dayNameList[x] )
         # Rename the columns with the names of the strains
@@ -60,9 +60,9 @@ class Experiment:
         standardDeviations = groupedSurvivalMatrix.groupby(by=groupedSurvivalMatrix.columns,axis=1).std()
         return standardDeviations
 
-    def wellJSON(self):
+    def wellJSON(self, ODT):
         # Get the well survival Matrix
-        wellSurvivalMatrix = self.generateWellSurivalMatrix()
+        wellSurvivalMatrix = self.generateWellSurivalMatrix(ODT)
         # Acquire the names of each column (well names)
 
         # Iterate over each column of the dataframe and return a vector of the survival for each well
@@ -72,8 +72,8 @@ class Experiment:
 
         return survivalList
 
-    def strainJSON(self, nameList, dayNameList):
-        strainSurvivalMatrix = self.generateGroupedSurvivalMatrix(nameList,dayNameList)
+    def strainJSON(self, nameList, dayNameList, ODT):
+        strainSurvivalMatrix = self.generateGroupedSurvivalMatrix(nameList,dayNameList,ODT)
 
         survivalList = []
         for column in strainSurvivalMatrix:

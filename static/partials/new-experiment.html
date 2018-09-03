@@ -38,21 +38,29 @@
       <div class= "alert alert-warning" ng-show = "failedAttempt && vm.days.length === 0"> Please enter day order. </div>
 
       <div class = "row">
-        <div class="form-group col-6">
+        <div class="form-group col-4">
           <label class="col-form-label" for="inputDefault">Machine</label>
           <select class="custom-select" ng-model = "machineSelector">
             <option ng-repeat = "machine in vm.machines">{{machine}}</option>
           </select>
         </div>
 
-        <div class="form-group col-6">
+        <div class="form-group col-4">
           <label class="col-form-label" for="inputDefault">Replication</label>
           <select class="custom-select" ng-model = "replicationSelector">
             <option ng-repeat = "replication in vm.replicants">{{replication}}</option>
           </select>
         </div>
 
+        <div class = "form-group col-4">
+          <label class="col-form-label" for="inputDefault">OD Threshold</label>
+          <input type="number" class="form-control" value="0.3" id="inputDefault" ng-model ="odt">
+        </div>
 
+      </div>
+
+      <div class = "row" ng-show = "odt < 0.2 || odt > 0.6" style = "padding: 20px">
+        <div class= "col-12 alert alert-warning" > ODT is best in range from 0.2 to 0.6 </div>
       </div>
 
       <label class="col-form-label" for="inputDefault">Enter Strain Names</label>
