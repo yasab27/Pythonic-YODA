@@ -52,6 +52,67 @@ function ExperimentController(strainDataFactory, $scope, $location, expInfoFacto
       }
     }
 
+    if($scope.machineSelector === "Bioscreen"){
+      var strains = cleanArray($scope.strainDesc.replace(/\s/g, "").split(","));
+      // $log.info(strains);
+
+      var configurationString = "";
+      for(var i = 0; i < strains.length; i++){
+        strainList = "";
+        for(var j =0; j < $scope.repoNumber; j++){
+          strainList = strainList + strains[i] + ",";
+        }
+        configurationString = configurationString +strainList;
+      }
+    }
+
+    vm.strainNames = configurationString.replace(/\s/g, "").slice(0, -1).toUpperCase();
+  });
+
+  $scope.$watch("repoNumber", function(){
+    vm.strainNames = "";
+
+    if($scope.replicationSelector === "Triplicates" && $scope.machineSelector === "Bioscreen"){
+      var strains = cleanArray($scope.strainDesc.replace(/\s/g, "").split(","));
+      // $log.info(strains);
+
+      var configurationString = "";
+      for(var i = 0; i < strains.length; i++){
+        configurationString = configurationString + strains[i] + "," + strains[i] + "," + strains[i] + ",";
+      }
+    } else if($scope.replicationSelector === "Duplicates" && $scope.machineSelector === "Bioscreen"){
+      var strains = cleanArray($scope.strainDesc.replace(/\s/g, "").split(","));
+      // $log.info(strains);
+
+      var configurationString = "";
+      for(var i = 0; i < strains.length; i++){
+        configurationString = configurationString + strains[i] + "," + strains[i] + ",";
+      }
+    } else if($scope.replicationSelector === "Single" && $scope.machineSelector === "Bioscreen")
+    {
+      var strains = cleanArray($scope.strainDesc.replace(/\s/g, "").split(","));
+      // $log.info(strains);
+
+      var configurationString = "";
+      for(var i = 0; i < strains.length; i++){
+        configurationString = configurationString + strains[i] + ",";
+      }
+    }
+
+    if($scope.machineSelector === "Bioscreen"){
+      var strains = cleanArray($scope.strainDesc.replace(/\s/g, "").split(","));
+      // $log.info(strains);
+
+      var configurationString = "";
+      for(var i = 0; i < strains.length; i++){
+        strainList = "";
+        for(var j =0; j < $scope.repoNumber; j++){
+          strainList = strainList + strains[i] + ",";
+        }
+        configurationString = configurationString +strainList;
+      }
+    }
+
     vm.strainNames = configurationString.replace(/\s/g, "").slice(0, -1).toUpperCase();
   });
 
